@@ -6,8 +6,8 @@ import '../../../utils/constant/app_icons.dart';
 import '../../../utils/validators/app_validators.dart';
 import '../../widgets/text_form/text_form_field.dart';
 
-class AuthFieldEmail extends StatelessWidget {
-  const AuthFieldEmail({Key? key}) : super(key: key);
+class AuthFieldUserName extends StatelessWidget {
+  const AuthFieldUserName({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class AuthFieldEmail extends StatelessWidget {
     return CustomTextForm(
       label: "Email",
       preIcon: AppIcons.mail,
-      validator: AppValidators.isEmail,
+      validator: AppValidators.isUserName,
       keyboardType: TextInputType.emailAddress,
       onSaved: pAuth.userAuth.setEmail,
     );
