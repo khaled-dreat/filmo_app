@@ -10,11 +10,10 @@ class AppValidators {
   static final String messageConfirmPass =
       "Your password and confirmation password don't match.";
 
-  static String? isEmail(String? value) => templateValidator(
-      value, !validators.isEmail(value ?? ''), messageCorrectEmail);
-
+  static String? isUserName(String? value) => templateValidator(
+      value, !validators.isLength(value ?? '', 4, 100), messageCorrectPass);
   static String? checkPass(String? value) => templateValidator(
-      value, !validators.isLength(value ?? '', 6, 12), messageCorrectPass);
+      value, !validators.isLength(value ?? '', 4, 100), messageCorrectPass);
 
   static String? checkConfirmPass(String? value, String? pass) =>
       templateValidator(
