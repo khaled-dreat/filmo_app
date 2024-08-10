@@ -1,18 +1,18 @@
+import 'package:filmo_app/utils/routes/app_routes.dart';
+import 'package:filmo_app/view/home/home_view.dart';
+import 'package:filmo_app/view/widgets/toast/app_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../controller/c_auth.dart';
-import '../../utils/routes/app_routes.dart';
 import '../widgets/button/custom_btn.dart';
 import '../widgets/loading/app_loading.dart';
-import '../widgets/toast/app_toast.dart';
-import 'register.dart';
 import 'widgets/auth_app_bar.dart';
 import 'widgets/auth_app_icon.dart';
 import 'widgets/auth_field_email.dart';
 import 'widgets/auth_field_pass.dart';
 import 'widgets/auth_footer.dart';
 import 'widgets/auth_forgot_pass.dart';
+import 'widgets/coustom_login_text.dart';
 
 class SingInView extends StatelessWidget {
   static const String nameRoute = 'SingInView';
@@ -34,49 +34,63 @@ class SingInView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // * Space
-                  SizedBox(
+                  const SizedBox(
                     height: 14,
                   ),
-                  // * logo
-                  const AuthAppIcon(),
+                  const CoustomLoginText(),
+
                   // * Space
-                  SizedBox(
-                    height: 14,
+                  const SizedBox(
+                    height: 100,
                   ),
-                  // * Email
-                  const AuthFieldEmail(),
+                  // * user name
+                  const AuthFieldUserName(),
                   // * Space
-                  SizedBox(
-                    height: 14,
+                  const SizedBox(
+                    height: 40,
                   ),
                   // * Pass
                   const AuthFieldPass(),
-                  // * Forgot Pass
-                  const AuthForgotPass(),
-
+                  const SizedBox(
+                    height: 200,
+                  ),
                   // * Button Sign in
                   pAuth.loading
                       ? const AppLoading(loading: TypeLoading.send)
-                      : CustomBtn(
-                          title: "login",
-                          onTap: () async {
-                            if (keyForm.currentState?.validate() ?? false) {
-                              // ✅
+                      : Row(
+                          children: [
+                            Expanded(
+                              child: CustomBtn(
+                                title: "login",
+                                onTap: () async {
+                                  if (keyForm.currentState?.validate() ??
+                                      false) {
+                                    // ✅
 
-                              keyForm.currentState?.save();
-                            }
-                          },
+                                    keyForm.currentState?.save();
+                                    if (await pAuth.login() != null || false) {
+                                      AppRoutes.go(context, HomeView.nameRoute);
+                                    } else {
+                                      AppToast.toast(
+                                          "Invalid username and/or password: You did not provide a valid login.");
+                                    }
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                   // * Space
-                  SizedBox(
+                  const SizedBox(
                     height: 14,
                   ),
                   // * Footer
                   AuthFooter(
-                    first: "Not Account",
-                    second: "Register",
-                    onTap: () => AppRoutes.go(context, PageRegister.nameRoute),
-                  ),
+                      first: "Not Account",
+                      second: "Register",
+                      onTap: () =>
+                          null //AppRoutes.go(context, PageRegister.nameRoute),
+                      ),
                 ],
               ),
             ),
