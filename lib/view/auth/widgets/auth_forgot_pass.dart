@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/routes/app_routes.dart';
-import '../forgot_pass.dart';
-
 class AuthForgotPass extends StatelessWidget {
   const AuthForgotPass({super.key});
 
@@ -12,10 +9,10 @@ class AuthForgotPass extends StatelessWidget {
       alignment: AlignmentDirectional.centerEnd,
       child: TextButton(
         onPressed: () {
-          AppRoutes.go(context, ForgotPassView.nameRoute);
+          // AppRoutes.go(context, ForgotPassView.nameRoute);
         },
         child: Text(
-          "forgot Pass",
+          "Forgot Pass",
         ),
       ),
     );
