@@ -1,3 +1,4 @@
+import 'package:filmo_app/utils/theme/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class AuthAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -6,7 +7,11 @@ class AuthAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title),
+      title: Text(
+        title,
+        style: AppTextStyle.h4Semibold16(context),
+      ),
+      centerTitle: true,
       elevation: 0,
       backgroundColor: Colors.transparent,
     );
