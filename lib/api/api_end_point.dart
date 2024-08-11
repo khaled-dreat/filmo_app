@@ -3,30 +3,51 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:filmo_app/api/api_handle.dart';
+import 'package:filmo_app/api/app_api_key.dart';
+import 'package:filmo_app/models/popular_movies/m_popular_movies_list.dart';
 import 'package:filmo_app/utils/failure/app_failure.dart';
 import 'package:http/http.dart' as http;
 
-import '../models/now/now/now_playing.dart';
+import '../models/now_playing/m_now_playing_list.dart';
 
 class ApiEndPoint extends ApiHandle {
   @override
-  Future<Either<Failure, NowPlayingModel>> NowPlayingFilmes() async {
+  Future<Either<Failure, NowPlayingListModel>> nowPlaying() async {
+    final headers = {
+      'Authorization': AppApiKey.readAccessToken,
+      'accept': 'application/json',
+    };
+    final uri = Uri.parse(AppApiKey.urlBuilder(value: AppApiKey.nowPlaying));
     final response = await http.get(
-      Uri.parse(
-          'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1'),
-      headers: {
-        'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyOWIxMGFkZWEzYzRhMTBlOGFiNDY0MmFmODNjZjViZSIsIm5iZiI6MTcyMzMxMjQ1NC44MjI2MjYsInN1YiI6IjY2YjFmNjVkM2RjNGJmZjEzYjc1NzE4NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.3HUyp5gul568LOrGgjf2f8_9JS4yuljJQoNkKfE4DNQ', // استبدل هذا بالتوكن الخاص بك
-        'accept': 'application/json',
-      },
+      uri,
+      headers: headers,
     );
 
-    //  final response = await http.get(uri, headers: headers);
+    if (response.statusCode == 200) {
+      Map<String, dynamic> data = jsonDecode(response.body);
+      //   log(data.toString());
+      return Right(NowPlayingListModel.fromJson(data));
+    } else {
+      return Left(ServerFailure.fromHttpException(response));
+    }
+  }
+
+  @override
+  Future<Either<Failure, PopularMoviesListModel>> popularMovies() async {
+    final headers = {
+      'Authorization': AppApiKey.readAccessToken,
+      'accept': 'application/json',
+    };
+    final uri = Uri.parse(AppApiKey.urlBuilder(value: AppApiKey.popular));
+    final response = await http.get(
+      uri,
+      headers: headers,
+    );
 
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
       log(data.toString());
-      return Right(NowPlayingModel.fromJson(data));
+      return Right(PopularMoviesListModel.fromJson(data));
     } else {
       return Left(ServerFailure.fromHttpException(response));
     }
