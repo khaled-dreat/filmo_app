@@ -1,3 +1,4 @@
+import 'package:filmo_app/controller/c_api.dart';
 import 'package:filmo_app/controller/c_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,4 +12,5 @@ void main() {
 
 List<SingleChildWidget> providerList = [
   ChangeNotifierProvider(create: (_) => ControllerAuth()),
+  ChangeNotifierProvider(create: (_) => ControllerApi()),
 ];
