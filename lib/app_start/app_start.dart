@@ -10,6 +10,7 @@ class AppStart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       // * Route
       routes: AppRoutes.routes,
       initialRoute: AppRoutes.initRoute,
