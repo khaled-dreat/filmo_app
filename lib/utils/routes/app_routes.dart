@@ -30,7 +30,6 @@ class AppRoutes {
   }
 }
 
-
- // * / -> index  -> home page
+// * / -> index  -> home page
 // * /setting
- // * /about
+// * /about
