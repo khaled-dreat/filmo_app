@@ -7,7 +7,7 @@ import '../../../utils/validators/app_validators.dart';
 import '../../widgets/text_form/text_form_field.dart';
 
 class AuthFieldPass extends StatelessWidget {
-  const AuthFieldPass({Key? key, this.isConfirm = false}) : super(key: key);
+  const AuthFieldPass({super.key, this.isConfirm = false});
   final bool isConfirm;
   @override
   Widget build(BuildContext context) {
