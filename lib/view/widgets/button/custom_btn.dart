@@ -22,7 +22,7 @@ class CustomBtn extends StatelessWidget {
       child: Container(
         width: 100,
         height: height ?? 70,
-        margin: EdgeInsets.symmetric(
+        margin: const EdgeInsets.symmetric(
           horizontal: 5,
           vertical: 5,
         ),
