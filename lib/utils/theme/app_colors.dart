@@ -28,9 +28,6 @@ class AppColors {
   static final Color lineDark = colorFromHex('#EAEAEA');
 }
 
-
-
-
 //  static Color red = Colors.red;
 //   static Color red1 = Color.fromARGB(255, 255, 42, 0);
 //   static Color red2 = Color.fromRGBO(250, 0, 0, 0.5);
