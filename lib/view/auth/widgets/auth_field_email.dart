@@ -7,7 +7,7 @@ import '../../../utils/validators/app_validators.dart';
 import '../../widgets/text_form/text_form_field.dart';
 
 class AuthFieldUserName extends StatelessWidget {
-  const AuthFieldUserName({Key? key}) : super(key: key);
+  const AuthFieldUserName({super.key});
 
   @override
   Widget build(BuildContext context) {
