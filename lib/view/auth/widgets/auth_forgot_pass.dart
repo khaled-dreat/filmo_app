@@ -11,7 +11,7 @@ class AuthForgotPass extends StatelessWidget {
         onPressed: () {
           // AppRoutes.go(context, ForgotPassView.nameRoute);
         },
-        child: Text(
+        child: const Text(
           "Forgot Pass",
         ),
       ),
