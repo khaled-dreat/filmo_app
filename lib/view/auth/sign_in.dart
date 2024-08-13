@@ -88,8 +88,8 @@ class SingInView extends StatelessWidget {
                   AuthFooter(
                       first: "Not Account",
                       second: "Register",
-                      onTap: () =>
-                          null //AppRoutes.go(context, PageRegister.nameRoute),
+                      onTap:
+                          () {} //AppRoutes.go(context, PageRegister.nameRoute),
                       ),
                 ],
               ),
