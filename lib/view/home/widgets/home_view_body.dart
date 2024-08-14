@@ -47,7 +47,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
               ],
             ),
           ),
-          cApi.loading
+          cApi.homeLoading
               ? const AppLoading()
               : const FeaturedNowPlayingListView(),
           Padding(
