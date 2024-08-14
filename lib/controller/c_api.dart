@@ -1,4 +1,5 @@
-import 'package:filmo_app/models/now_playing/m_now_playing_list.dart';
+import 'package:filmo_app/models/genres/m_genre.dart';
+import 'package:filmo_app/models/genres/m_genres_list.dart';
 import 'package:filmo_app/view/widgets/toast/app_toast.dart';
 import 'package:flutter/material.dart';
 
@@ -7,12 +8,20 @@ import '../models/now_playing/m_now_playing.dart';
 import '../models/popular_movies/m_popular_movies.dart';
 
 class ControllerApi extends ChangeNotifier {
-  bool loading = false;
   ApiEndPoint apiEndPoint = ApiEndPoint();
+// * Loading
+  bool homeLoading = false;
 
   ///  change value loading
-  set changeLoadingNowPlaying(bool value) {
-    loading = value;
+  set changeHomeLoading(bool value) {
+    homeLoading = value;
+    notifyListeners();
+  }
+
+  bool loadingGenres = false;
+
+  set changeGenresLoading(bool value) {
+    loadingGenres = value;
     notifyListeners();
   }
 
@@ -25,8 +34,8 @@ class ControllerApi extends ChangeNotifier {
   List<NowPlayingModel> nowPlayingMovies = [];
 
   Future<void> getNowPlayingMovies() async {
-    changeLoadingNowPlaying = true;
-    var result = await apiEndPoint.nowPlaying();
+    changeHomeLoading = true;
+    var result = await apiEndPoint.getNowPlayingList();
     result.fold(
       (failure) {
         AppToast.toast(failure.message);
@@ -36,15 +45,15 @@ class ControllerApi extends ChangeNotifier {
       },
     );
 
-    changeLoadingNowPlaying = false;
+    changeHomeLoading = false;
     notifyListeners();
   }
 
   List<PopularMoviesModel> popularMovies = [];
 
   Future<void> getPopularMovies() async {
-    changeLoadingNowPlaying = true;
-    var result = await apiEndPoint.popularMovies();
+    changeHomeLoading = true;
+    var result = await apiEndPoint.getPopularMoviesList();
     result.fold(
       (failure) {
         AppToast.toast(failure.message);
@@ -54,7 +63,25 @@ class ControllerApi extends ChangeNotifier {
       },
     );
 
-    changeLoadingNowPlaying = false;
+    changeHomeLoading = false;
+    notifyListeners();
+  }
+
+  List<GenreModel> genres = [];
+
+  Future<void> getGenresList() async {
+    changeGenresLoading = true;
+    var result = await apiEndPoint.getGenresList();
+    result.fold(
+      (failure) {
+        AppToast.toast(failure.message);
+      },
+      (genresList) {
+        genres = genresList.genres!;
+      },
+    );
+
+    changeGenresLoading = false;
     notifyListeners();
   }
 }
