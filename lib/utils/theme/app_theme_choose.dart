@@ -54,7 +54,11 @@ class AppThemeChoose {
     // * appBar Theme
     return ThemeData.dark().copyWith(
       scaffoldBackgroundColor: AppColors.dark,
-
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: AppColors.dark,
+          selectedItemColor: AppColors.blueAccent,
+          elevation: 0,
+          unselectedItemColor: AppColors.grey),
       // appBarTheme: AppBarTheme(
       //   elevation: 10,
       //   centerTitle: true,
