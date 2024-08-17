@@ -6,7 +6,6 @@ import 'package:filmo_app/api/api_handle.dart';
 import 'package:filmo_app/api/app_api_key.dart';
 import 'package:filmo_app/models/genres/m_genres_list.dart';
 import 'package:filmo_app/models/popular_movies/m_popular_movies_list.dart';
-import 'package:filmo_app/models/search/m_search.dart';
 import 'package:filmo_app/models/search/m_search_list.dart';
 import 'package:filmo_app/utils/failure/app_failure.dart';
 import 'package:http/http.dart' as http;
