@@ -1,4 +1,7 @@
+import 'package:filmo_app/controller/c_api.dart';
+import 'package:filmo_app/models/search/m_search_list.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../../../../utils/theme/app_colors.dart';
 import '../../../../../../utils/theme/app_text_style.dart';
 
@@ -11,6 +14,14 @@ class CustomTextFormSrh extends StatelessWidget {
     return TextFormField(
       onTap: onTap,
       readOnly: readOnly,
+      onFieldSubmitted: (value) async {
+        Provider.of<ControllerApi>(context, listen: false).searchModel =
+            SearchListModel();
+        await Provider.of<ControllerApi>(context, listen: false)
+            .getSearchResult(
+          srhText: value,
+        );
+      },
       decoration: InputDecoration(
           filled: true,
           prefixIcon: Icon(
@@ -18,7 +29,7 @@ class CustomTextFormSrh extends StatelessWidget {
             color: AppColors.grey,
             size: 25,
           ),
-          hintText: "Search",
+          hintText: "Type title, categories, years, etc",
           hintStyle: AppTextStyle.h5Medium14(context)
               .copyWith(color: AppColors.grey, fontSize: 14),
           fillColor: AppColors.soft,
@@ -30,7 +41,7 @@ class CustomTextFormSrh extends StatelessWidget {
 
   OutlineInputBorder outlineInputBorder() {
     return OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-        borderSide: BorderSide(color: Colors.transparent));
+        borderRadius: BorderRadius.circular(25),
+        borderSide: const BorderSide(color: Colors.transparent));
   }
 }
