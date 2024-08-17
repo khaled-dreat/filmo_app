@@ -7,11 +7,9 @@ import '../../controller/c_auth.dart';
 import '../widgets/button/custom_btn.dart';
 import '../widgets/loading/app_loading.dart';
 import 'widgets/auth_app_bar.dart';
-import 'widgets/auth_app_icon.dart';
 import 'widgets/auth_field_email.dart';
 import 'widgets/auth_field_pass.dart';
 import 'widgets/auth_footer.dart';
-import 'widgets/auth_forgot_pass.dart';
 import 'widgets/coustom_login_text.dart';
 
 class SingInView extends StatelessWidget {
@@ -69,6 +67,7 @@ class SingInView extends StatelessWidget {
 
                                     keyForm.currentState?.save();
                                     if (await pAuth.login() != null || false) {
+                                      // ignore: use_build_context_synchronously
                                       AppRoutes.go(context, HomeView.nameRoute);
                                     } else {
                                       AppToast.toast(
