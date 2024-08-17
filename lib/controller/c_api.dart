@@ -1,6 +1,4 @@
 import 'package:filmo_app/models/genres/m_genre.dart';
-import 'package:filmo_app/models/genres/m_genres_list.dart';
-import 'package:filmo_app/models/search/m_search.dart';
 import 'package:filmo_app/models/search/m_search_list.dart';
 import 'package:filmo_app/view/widgets/toast/app_toast.dart';
 import 'package:flutter/material.dart';
