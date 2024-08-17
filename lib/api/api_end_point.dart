@@ -6,6 +6,8 @@ import 'package:filmo_app/api/api_handle.dart';
 import 'package:filmo_app/api/app_api_key.dart';
 import 'package:filmo_app/models/genres/m_genres_list.dart';
 import 'package:filmo_app/models/popular_movies/m_popular_movies_list.dart';
+import 'package:filmo_app/models/search/m_search.dart';
+import 'package:filmo_app/models/search/m_search_list.dart';
 import 'package:filmo_app/utils/failure/app_failure.dart';
 import 'package:http/http.dart' as http;
 
@@ -47,7 +49,6 @@ class ApiEndPoint extends ApiHandle {
 
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
-      log(data.toString());
       return Right(PopularMoviesListModel.fromJson(data));
     } else {
       return Left(ServerFailure.fromHttpException(response));
@@ -68,8 +69,29 @@ class ApiEndPoint extends ApiHandle {
 
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
-      log(data.toString());
       return Right(GenresListModel.fromJson(data));
+    } else {
+      return Left(ServerFailure.fromHttpException(response));
+    }
+  }
+
+  @override
+  Future<Either<Failure, SearchListModel>> search(
+      {required String srhText}) async {
+    final headers = {
+      'Authorization': AppApiKey.readAccessToken,
+      'accept': 'application/json',
+    };
+    final uri = Uri.parse(AppApiKey.urlSearchBuilder(query: srhText));
+    final response = await http.get(
+      uri,
+      headers: headers,
+    );
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> data = jsonDecode(response.body);
+      log(data.toString());
+      return Right(SearchListModel.fromJson(data));
     } else {
       return Left(ServerFailure.fromHttpException(response));
     }
