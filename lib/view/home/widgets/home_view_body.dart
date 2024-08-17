@@ -1,4 +1,3 @@
-import 'package:filmo_app/api/app_api_key.dart';
 import 'package:filmo_app/utils/theme/app_colors.dart';
 import 'package:filmo_app/utils/theme/app_text_style.dart';
 import 'package:filmo_app/view/widgets/loading/app_loading.dart';
@@ -23,8 +22,8 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      ControllerApi CApi = Provider.of<ControllerApi>(context, listen: false);
-      CApi.initRequest();
+      ControllerApi cApi = Provider.of<ControllerApi>(context, listen: false);
+      cApi.initRequest();
     });
   }
 
@@ -69,80 +68,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           ),
           const FeaturedPopularMoviesListView()
         ],
-      ),
-    );
-  }
-}
-
-class CategoriesSection extends StatelessWidget {
-  const CategoriesSection({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          "Categories",
-          style: AppTextStyle.h4Semibold16(context),
-        ),
-        CategorySelector()
-      ],
-    );
-  }
-}
-
-class CategorySelector extends StatefulWidget {
-  const CategorySelector({super.key});
-
-  @override
-  _CategorySelectorState createState() => _CategorySelectorState();
-}
-
-class _CategorySelectorState extends State<CategorySelector> {
-  int _selectedIndex = 0;
-
-  final List<String> categories = [
-    'All',
-    'Comedy',
-    'Animation',
-    'Dokument',
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 40,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
-            child: Container(
-              width: 100,
-              alignment: Alignment.center,
-              margin: const EdgeInsets.symmetric(horizontal: 12),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: BoxDecoration(
-                color: _selectedIndex == index
-                    ? AppColors.soft // Background color for selected
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Text(
-                categories[index],
-                style: AppTextStyle.h6Medium12(context).copyWith(
-                    color: _selectedIndex == index
-                        ? AppColors.blueAccent
-                        : AppColors.whiteGrey),
-              ),
-            ),
-          );
-        },
       ),
     );
   }
