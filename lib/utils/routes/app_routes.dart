@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../view/auth/sign_in.dart';
 import '../../view/auth/wrapper.dart';
 import '../../view/home/home_view.dart';
+import '../../view/search/search_view.dart';
 
 class AppRoutes {
   // * Pages  App
@@ -10,6 +11,7 @@ class AppRoutes {
     Wrapper.nameRoute: (context) => const Wrapper(),
     SingInView.nameRoute: (context) => const SingInView(),
     HomeView.nameRoute: (context) => const HomeView(),
+    SearchView.nameRoute: (context) => const SearchView(),
   };
 
   // * inti Route
