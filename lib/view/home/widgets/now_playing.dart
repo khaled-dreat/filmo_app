@@ -1,10 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../controller/c_api.dart';
-import '../../../models/now_playing/m_now_playing.dart';
-import '../../../utils/theme/app_colors.dart';
-import '../../../utils/theme/app_text_style.dart';
 import 'custom_now_playing_card.dart';
 import 'scroll_widget.dart';
 
