@@ -1,5 +1,7 @@
 import 'package:filmo_app/models/genres/m_genre.dart';
 import 'package:filmo_app/models/genres/m_genres_list.dart';
+import 'package:filmo_app/models/search/m_search.dart';
+import 'package:filmo_app/models/search/m_search_list.dart';
 import 'package:filmo_app/view/widgets/toast/app_toast.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +24,13 @@ class ControllerApi extends ChangeNotifier {
 
   set changeGenresLoading(bool value) {
     loadingGenres = value;
+    notifyListeners();
+  }
+
+  bool loading = false;
+
+  set changeLoading(bool value) {
+    loading = value;
     notifyListeners();
   }
 
@@ -82,6 +91,31 @@ class ControllerApi extends ChangeNotifier {
     );
 
     changeGenresLoading = false;
+    notifyListeners();
+  }
+
+  bool isSearching = false;
+
+  set changeIsSearching(bool value) {
+    isSearching = value;
+    notifyListeners();
+  }
+
+  SearchListModel? searchModel;
+  Future<void> getSearchResult({required String srhText}) async {
+    changeLoading = true;
+    var result = await apiEndPoint.search(srhText: srhText);
+    result.fold(
+      (failure) {
+        AppToast.toast(failure.message);
+      },
+      (result) {
+        searchModel = result;
+      },
+    );
+
+    changeLoading = false;
+    changeIsSearching = true;
     notifyListeners();
   }
 }
